@@ -106,5 +106,5 @@ INSERT INTO SALESMAN VALUES(5001,'James Hoog','New York',0.15),
 (5003,'Lauson Hen','San Jose',0.12);
 
 select c.cust_name,c.city,c.grade,s.salesman_name,
-s.city from customer c,salesman s where c.grade<=100 and c.salesman_id=s.salesman_id order by c.customer_id;
+s.city from customer c,salesman s where c.grade<100 and c.salesman_id=s.salesman_id order by c.customer_id;
 
