@@ -1,1 +1,110 @@
+create database Cunsultation_Therapy;
+
+create table Doctor(id int primary key,
+name1 varchar(30) not null,
+specialization varchar(30));
+insert into Doctor values(100,'Suresh','Dentist'),
+(101,'sudharshan','Neurology'),
+(102,'verra','Cardiologists'),
+(103,'shanthan','gynecologists'),
+(104,'deelip','psychiatrists');
+
+
+create table patient(pt_id int primary key,
+ptname varchar(30) not null,
+age int not null);
+insert into patient values(201,'prashanth',34),
+(202,'prathap',29),
+(203,'Lokesh',22);
+
+
+create table Appointements(Apt_id int primary key not null,
+dct_id int not null,
+pat_id int not null,
+foreign key (pat_id) references patient(pt_id),
+foreign key (dct_id) references Doctor(id));
+insert into Appointements values(301,100,202),
+(302,104,201),
+(303,102,203);
+
+
+create table Review(r_id int primary key,
+pat_id int not null,
+d_name varchar(30) not null,
+review varchar(30));
+insert into Review values (421,201,'Suresh','Very Good'),
+(435,202,'verra','Good'),
+(498,203,'shanthan','satisfactory');
+
+
+-- ----------------------------------------------
+-- Exercise 2 Contact Table
+
+create TABLE CONTACT(
+CONTACT_ID INT PRIMARY KEY NOT NULL,
+CONTACT_EMAIL VARCHAR(30),
+FNAME VARCHAR(20),
+LNAME VARCHAR(20),
+COMPANY VARCHAR(20),
+ACTIVE_FLAG INT,
+OPT_OUT INT);
+
+INSERT INTO CONTACT VALUES(123,"a@a.com","Kian","Seth","ABC",1,1),(133,"b@a.com","Neha","Seth","ABC",1,0),(234,"c@c.com","Puru","Malik","CDF",0,0),(342,"d@d.com","Sid","Maan","TEG",1,0);
+-- 1
+SELECT * FROM CONTACT WHERE ACTIVE_FLAG=1;
+
+-- 2
+DELETE FROM CONTACT WHERE OPT_OUT=1;
+
+-- 3
+DELETE FROM CONTACT WHERE COMPANY='ABC';
+
+-- 4
+INSERT INTO CONTACT VALUES(658,'MILI@gmail.com',
+'MILI','SETH','DGH',1,1);
+
+-- 5
+SELECT DISTINCT(COMPANY) FROM CONTACT;
+
+-- 6
+UPDATE CONTACT SET FNAME='niti' WHERE FNAME='mili';
+
+select * from contact;
+
+
+
+-- ----------------------------
+-- exercise 3
+CREATE TABLE CUSTOMER(
+	customer_id INT PRIMARY KEY NOT NULL,
+    cust_name VARCHAR(20),
+    city VARCHAR(20),
+    grade INT,
+    salesman_id INT,
+    foreign key(salesman_id) references salesman(salesman_id));
+INSERT INTO CUSTOMER VALUES(3002,"Nick Rimando","New York",100,5001),
+(3007,"Brad Davis","New York",200,5001),
+(3005,"Graham Zusi","California",200,5002),
+(3008,"Julian Green","London",300,5002),
+(3004,"Fabian Johnson","Paris",300,5006),
+(3009,"Geoff Cameron","Berlin",100 ,5003),
+(3003,"Jozy Altidor","Moscow",200,5007);
+INSERT INTO CUSTOMER(customer_id,cust_name,city,salesman_id) values(3001,"Brad Guzan","London",5005);
+
+
+
+CREATE TABLE SALESMAN(
+SALESMAN_ID INT PRIMARY KEY NOT NULL,
+SALESMAN_NAME VARCHAR(40) ,
+CITY VARCHAR(40),
+COMMISSION FLOAT);
+INSERT INTO SALESMAN VALUES(5001,'James Hoog','New York',0.15),
+(5002,'Nail Knite','Paris',0.13),
+(5005,'Pit Alex','London',0.11),
+(5006,'Mc Lyon','Paris',0.14),
+(5007,'Paul Adam','Rome',0.13),
+(5003,'Lauson Hen','San Jose',0.12);
+
+select c.cust_name,c.city,c.grade,s.salesman_name,
+s.city from customer c,salesman s where c.grade<=100 and c.salesman_id=s.salesman_id order by c.customer_id;
 
